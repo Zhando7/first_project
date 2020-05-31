@@ -74,7 +74,7 @@ composer require --prefer-dist "kartik-v/yii2-export"
 ### Слияние репозитория с yii
 Так как у нас уже есть готовый каркас, теперь следует объединить файлы данного репозитория с yii2. Для этого введите в командной строке:
 ```
-del README.md
+del README.md .gitignore
 git init
 git pull https://github.com/Zhando7/first_project.git
 ```

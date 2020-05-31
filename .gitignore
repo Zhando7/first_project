@@ -49,6 +49,7 @@ phpunit.phar
 /models/LoginForm.php
 /models/User.php
 /mail/layouts
+/runtime
 /tests
 /views/layouts/main.php
 /views/site
