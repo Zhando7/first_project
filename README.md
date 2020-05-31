@@ -45,14 +45,14 @@ git version 2.26.0.windows.1    //for example
 
 <VirtualHost *:80>
     DocumentRoot "C:/xampp/htdocs/test-project/web"
-    ServerName test-project.com
+    ServerName www.test-project.com
 </VirtualHost>
 ```
 4) Проследовать по следующему пути `C:\Windows\System32\drivers\etc\`
 5) Открыть файл "**hosts**" любым текстовым редактором в режиме администратора
 6) Добавить в конце файла следующий фрагмент:
 ```
-127.0.0.1		test-project.com
+127.0.0.1		www.test-project.com
 ```
 Таким образом, после запуска Apache, мы сможем сразу обращаться к веб-приложению только по адресу *test-project.com* и все запросы будут корректно работать.
 ### Установка Yii
@@ -107,7 +107,7 @@ git pull https://github.com/Zhando7/first_project.git
 return [
 	// Добавляем ниже других параметрами
 	'supportEmail' => 'zhando797@gmail.com',		// Автоматическая отправка писем с указанной почты, необходимо для восстановления пароля
-	'secretKeyExpire' => 60 * 60,					// Время хранения секретного ключа
+	'secretKeyExpire' => 60 * 60,				// Время хранения секретного ключа
 ]
 ```
 4) В этой же директорий, открыть файл "*web.php*"
@@ -121,10 +121,10 @@ $config = [
 	'charset' => 'UTF-8',
 	'language' => 'ru_RU',
 
-    // ЗАТЕМ ВНУТРИ МАССИВА `components`
+        // ЗАТЕМ ВНУТРИ МАССИВА `components`
 	'components' = [
 
-        // ДОБАВЛЯЕМ/ИЗМЕНЯЕМ НИЖЕ ДРУГИХ ПАРАМЕТРЫ
+            // ДОБАВЛЯЕМ/ИЗМЕНЯЕМ НИЖЕ ДРУГИХ ПАРАМЕТРЫ
 		'user' => [
 			'identityClass' => 'app\models\Tables\Users',
 			'enableAutoLogin' => true,
@@ -132,44 +132,43 @@ $config = [
 		'errorHandler' => [	
 	            'errorAction' => 'main/error',
 		],
-        'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-			'useFileTransport' => false,
-			'messageConfig' => [
-				'from' => ['zhando797@gmail.com' => 'zhando797'],
-			],
-			'transport' => [
-				'class' => 'Swift_SmtpTransport',
-				'host' => 'smtp.gmail.com',
-				'username' => 'zhando797@gmail.com',
-				'password' => 'ПАРОЛЬ ОТ ПОЧТЫ',            // не забудьте ввести свой настоящий пароль
-				'port' => '465',
-				'encryption' => 'ssl',
-			],
+            'mailer' => [
+                'class' => 'yii\swiftmailer\Mailer',
+                // send all mails to a file by default. You have to set
+                // 'useFileTransport' to false and configure a transport
+                // for the mailer to send real emails.
+                'useFileTransport' => false,
+                'messageConfig' => [
+                    'from' => ['zhando797@gmail.com' => 'zhando797'],
+                ],
+                'transport' => [
+                    'class' => 'Swift_SmtpTransport',
+                    'host' => 'smtp.gmail.com',
+                    'username' => 'zhando797@gmail.com',
+                    'password' => 'ПАРОЛЬ ОТ ПОЧТЫ',            // не забудьте ввести свой настоящий пароль
+                    'port' => '465',
+                    'encryption' => 'ssl',
+                ],
+            ],   
+            /*
+            * ДОБАВЛЯЕМ НИЖЕ ЗАКОММЕНТИРОВАННОГО 'urlManager'
+            * инициализируем красивые ссылки
+            */
+            'urlManager' => [
+                'enablePrettyUrl' => true,
+                'showScriptName' => false,
+                'rules' => [
+                    '' => 'main/index',
+                    '<action>'=>'main/<action>',
+                    '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                    '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                ],
+            ],
         ],
-
-        /*
-        * ДОБАВЛЯЕМ НИЖЕ ЗАКОММЕНТИРОВАННОГО 'urlManager'
-        * инициализируем красивые ссылки
-        */
-		'urlManager' => [
-			'enablePrettyUrl' => true,
-	        'showScriptName' => false,
-        	'rules' => [
-				'' => 'main/index',
-				'<action>'=>'main/<action>',
-				'<controller:\w+>/<id:\d+>' => '<controller>/view',
-               	'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-		        '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-           	],
-        ],
-	],
 	'params' => $params,
 
-    // ПАРАМЕТРЫ МОДУЛЯ ДЛЯ ЭКСОРТА В EXCELL
+        // ПАРАМЕТРЫ МОДУЛЯ ДЛЯ ЭКСОРТА В EXCELL
 	'modules' => [
 		'gridview' => [
 		'class' => '\kartik\grid\Module',]
@@ -192,4 +191,4 @@ $config = [
 6) Для иморта базы данных, выберите файл который находится в корневой директорий веб-приложения в папке "*database*". После этого спуститесь в нижнюю часть страницы, и нажмите на кнопку "Вперед".
 
 ## Запуск проекта
-Наконец-то мы сделали всё необходимое, теперь осталось перейти по ссылке [test-project.com](test-project.com)
+Наконец-то мы сделали всё необходимое, теперь осталось перейти по ссылке [test-project.com](www.test-project.com)
