@@ -79,9 +79,117 @@ git init
 git pull https://github.com/Zhando7/first_project.git
 ```
 ### Подключение статических файлов
-
+Выполните следующие шаги:
+1) В корневой директорий веб-приложения войти в папку "**assets**"
+2) Открыть файл "*AppAsset.php*"
+3) Дополнить публичные переменные класса AppAsset следующими параметрами:
+```
+    public $css = [
+        'css/site.css',
+        'css/required.css',
+        'css/font-awesome.css'
+    ];
+    public $js = [
+        'js/fusioncharts.js',
+        'js/fusioncharts.charts.js',
+        'js/themes/fusioncharts.theme.fint.js'
+    ];
+    public $jsOptions = [
+        'position' => \yii\web\View::POS_HEAD
+    ];
+```
 ### Изменение конфигурационных файлов
+Выполните следующие шаги:
+1) В корневой директорий веб-приложения войти в папку "**config**"
+2) Открыть файл "*params.php*"
+3) Дополнить возвращаемый массив следующими параметрами:
+```
+return [
+	// Добавляем ниже других параметрами
+	'supportEmail' => 'zhando797@gmail.com',		// Автоматическая отправка писем с указанной почты, необходимо для восстановления пароля
+	'secretKeyExpire' => 60 * 60,					// Время хранения секретного ключа
+]
+```
+4) В этой же директорий, открыть файл "*web.php*"
+5) Дополнить/изменить вложенные параметры массива **$config**:
+```
+$config = [
+	// ДОБАВЛЯЕМ В ВЕРХНЕЙ ЧАСТИ СРЕДИ ДРУГИХ ПАРАМЕТРОВ
+	'layout' => 'basic',
+	'defaultRoute' => 'main/index',
+	'name' => '3D Алем',
+	'charset' => 'UTF-8',
+	'language' => 'ru_RU',
 
+    // ЗАТЕМ ВНУТРИ МАССИВА `components`
+	'components' = [
+
+        // ДОБАВЛЯЕМ/ИЗМЕНЯЕМ НИЖЕ ДРУГИХ ПАРАМЕТРЫ
+		'user' => [
+			'identityClass' => 'app\models\Tables\Users',
+			'enableAutoLogin' => true,
+		],
+		'errorHandler' => [	
+	            'errorAction' => 'main/error',
+		],
+        'mailer' => [
+            'class' => 'yii\swiftmailer\Mailer',
+            // send all mails to a file by default. You have to set
+            // 'useFileTransport' to false and configure a transport
+            // for the mailer to send real emails.
+			'useFileTransport' => false,
+			'messageConfig' => [
+				'from' => ['zhando797@gmail.com' => 'zhando797'],
+			],
+			'transport' => [
+				'class' => 'Swift_SmtpTransport',
+				'host' => 'smtp.gmail.com',
+				'username' => 'zhando797@gmail.com',
+				'password' => 'ПАРОЛЬ ОТ ПОЧТЫ',            // не забудьте ввести свой настоящий пароль
+				'port' => '465',
+				'encryption' => 'ssl',
+			],
+        ],
+
+        /*
+        * ДОБАВЛЯЕМ НИЖЕ ЗАКОММЕНТИРОВАННОГО 'urlManager'
+        * инициализируем красивые ссылки
+        */
+		'urlManager' => [
+			'enablePrettyUrl' => true,
+	        'showScriptName' => false,
+        	'rules' => [
+				'' => 'main/index',
+				'<action>'=>'main/<action>',
+				'<controller:\w+>/<id:\d+>' => '<controller>/view',
+               	'<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+		        '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+           	],
+        ],
+	],
+	'params' => $params,
+
+    // ПАРАМЕТРЫ МОДУЛЯ ДЛЯ ЭКСОРТА В EXCELL
+	'modules' => [
+		'gridview' => [
+		'class' => '\kartik\grid\Module',]
+		// enter optional module parameters below - only if you need to
+		// use your own export download action or custom translation
+		// message source
+		// 'downloadAction' => 'gridview/export/download',
+		// 'i18n' => []
+	],
+];
+```
+6) В этой же директорий, открыть файл "*db.php*"
+7) Сменить значение `dbname=yii2basic` на `dbname=test_bd`
 ## Импорт базы данных
+Выполните следующие действия:
+1) В "*XAMPP Control panel*" запустить модули *Apache* и *MySQL*, затем нажать на кнопку "*Admin*" напротив модуля *MySQL*
+2) В открывшемся окне, в левом sidebar, выполнить действие "*Создать БД*"
+3) В поле "*Имя базы данных*" указать "**test_bd**" и поменять кодировку на "*utf8_general_ci*", затем подтвердить создание БД 
+4) Теперь выберите созданную базу данных, затем в верхней части страницы, на панели нажмите на "*Импорт*"
+6) Для иморта базы данных, выберите файл который находится в корневой директорий веб-приложения в папке "*database*". После этого спуститесь в нижнюю часть страницы, и нажмите на кнопку "Вперед".
 
 ## Запуск проекта
+Наконец-то мы сделали всё необходимое, теперь осталось перейти по ссылке [test-project.com](test-project.com)
