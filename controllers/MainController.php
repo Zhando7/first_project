@@ -267,7 +267,7 @@ class MainController extends Controller
 	*/
 	public function actionHelp(){
 		Url::remember();
-		return $this->render('help', ['url' => $url]);
+		return $this->render('help');
 	}
 }
 ?>
