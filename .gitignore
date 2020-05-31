@@ -49,5 +49,6 @@ phpunit.phar
 /composer.lock
 /docker-composer.yml
 /LICENSE.md
+/README.md
 /requirements.php
 /Vagrantfile
