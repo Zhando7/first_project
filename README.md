@@ -121,54 +121,54 @@ $config = [
 	'charset' => 'UTF-8',
 	'language' => 'ru_RU',
 
-        // ЗАТЕМ ВНУТРИ МАССИВА `components`
+    // ЗАТЕМ ВНУТРИ МАССИВА `components`
 	'components' = [
 
-            // ДОБАВЛЯЕМ/ИЗМЕНЯЕМ НИЖЕ ДРУГИХ ПАРАМЕТРЫ
+    // ДОБАВЛЯЕМ/ИЗМЕНЯЕМ НИЖЕ ДРУГИХ ПАРАМЕТРЫ
 	'user' => [
 		'identityClass' => 'app\models\Tables\Users',
 		'enableAutoLogin' => true,
 	],
 	'errorHandler' => [	
-	       'errorAction' => 'main/error',
+	    'errorAction' => 'main/error',
 	],
-            'mailer' => [
-                'class' => 'yii\swiftmailer\Mailer',
-                // send all mails to a file by default. You have to set
-                // 'useFileTransport' to false and configure a transport
-                // for the mailer to send real emails.
-                'useFileTransport' => false,
-                'messageConfig' => [
-                    'from' => ['zhando797@gmail.com' => 'zhando797'],
-                ],
-                'transport' => [
-                    'class' => 'Swift_SmtpTransport',
-                    'host' => 'smtp.gmail.com',
-                    'username' => 'zhando797@gmail.com',
-                    'password' => 'ПАРОЛЬ ОТ ПОЧТЫ',            // не забудьте ввести свой настоящий пароль
-                    'port' => '465',
-                    'encryption' => 'ssl',
-                ],
-            ],   
-            /*
-            * ДОБАВЛЯЕМ НИЖЕ ЗАКОММЕНТИРОВАННОГО 'urlManager'
-            * инициализируем красивые ссылки
-            */
-            'urlManager' => [
-                'enablePrettyUrl' => true,
-                'showScriptName' => false,
-                'rules' => [
-                    '' => 'main/index',
-                    '<action>'=>'main/<action>',
-                    '<controller:\w+>/<id:\d+>' => '<controller>/view',
-                    '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
-                    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
-                ],
+    'mailer' => [
+        'class' => 'yii\swiftmailer\Mailer',
+        // send all mails to a file by default. You have to set
+        // 'useFileTransport' to false and configure a transport
+        // for the mailer to send real emails.
+        'useFileTransport' => false,
+        'messageConfig' => [
+            'from' => ['zhando797@gmail.com' => 'zhando797'],
+        ],
+        'transport' => [
+            'class' => 'Swift_SmtpTransport',
+            'host' => 'smtp.gmail.com',
+            'username' => 'zhando797@gmail.com',
+            'password' => 'ПАРОЛЬ ОТ ПОЧТЫ',            // не забудьте ввести свой настоящий пароль
+            'port' => '465',
+            'encryption' => 'ssl',
+            ],
+        ],   
+        /*
+        * ДОБАВЛЯЕМ НИЖЕ ЗАКОММЕНТИРОВАННОГО 'urlManager'
+        * инициализируем красивые ссылки
+        */
+        'urlManager' => [
+            'enablePrettyUrl' => true,
+            'showScriptName' => false,
+            'rules' => [
+                '' => 'main/index',
+                '<action>'=>'main/<action>',
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
             ],
         ],
+    ],
 	'params' => $params,
 
-        // ПАРАМЕТРЫ МОДУЛЯ ДЛЯ ЭКСОРТА В EXCELL
+    // ПАРАМЕТРЫ МОДУЛЯ ДЛЯ ЭКСОРТА В EXCELL
 	'modules' => [
 		'gridview' => [
 		'class' => '\kartik\grid\Module',]
@@ -193,3 +193,11 @@ $config = [
 УРАА! Теперь всё готово.
 ## Запуск проекта
 Наконец-то мы сделали всё необходимое, теперь осталось перейти по ссылке [test-project.com](http://www.test-project.com/)
+
+**Примечание**: чтобы переключить проект с режима разработки на *production*, следует:
+1) В корневой директории веб-приложения открыть папку "**web**"
+2) Изменить значения следующих констант:
+```
+defined('YII_DEBUG') or define('YII_DEBUG', false);
+defined('YII_ENV') or define('YII_ENV', 'prod');
+```
