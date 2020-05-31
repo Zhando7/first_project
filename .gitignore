@@ -56,11 +56,11 @@ phpunit.phar
 /views/site
 /widjets
 
-/.bowerrc
+/bowerrc
 /codeception.yml
 /composer.json
 /composer.lock
-/docker-composer.yml
+/docker-compose.yml
 /LICENSE.md
 /README.md
 /requirements.php
