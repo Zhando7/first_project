@@ -58,7 +58,7 @@ git version 2.26.0.windows.1    //for example
 ### Установка Yii
 Yii это производительный PHP фреймворк, который использует для организаци кода архитектурный паттерн [MVC](https://ru.wikipedia.org/wiki/Model-View-Controller) и предназначенный для быстрой разработки современных веб-приложений. Для его установки используем *Composer*. Для этого откройте командную строку и выполните следующие команды:
 ```
-cd ./
+cd ../..
 cd xampp/htdocs/test-project
 composer create-project --prefer-dist yiisoft/yii2-app-basic ./
 ```
