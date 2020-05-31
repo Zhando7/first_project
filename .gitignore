@@ -36,11 +36,19 @@ phpunit.phar
 /web/index-test.php
 /web/robots.txt
 /web/assets
+/web/uploadedfiles
 
 /assets
 /commands
 /config
+/controllers/SiteController.php
+/models/ContactForm.php
+/models/LoginForm.php
+/models/User.php
+/mail/layouts
 /tests
+/views/layouts/main.php
+/views/site
 /widjets
 
 /.bowerrc
