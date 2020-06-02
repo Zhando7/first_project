@@ -40,7 +40,6 @@ phpunit.phar
 /web/index-test.php
 /web/robots.txt
 /web/assets
-/web/uploadedfiles
 
 /assets
 /commands
